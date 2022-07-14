@@ -1,9 +1,14 @@
 {
   "name": "nomial",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A TypeScript implementation of High-Performance Polynomial Root Finding for Graphics (Yuksel 2022)",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
+  "homepage": "https://github.com/pboyer/nomial",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/pboyer/nomial.git"
+  },
   "scripts": {
     "test": "ts-node test/index.ts",
     "build": "tsc"
