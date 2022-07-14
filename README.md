@@ -1,6 +1,6 @@
-## Rootfinder
+## Nomial
 
-Rootfinder is a TypeScript implementation of Cem Yuksel's fast, robust, and simple root finding algorithm presented in the paper "High-Performance Polynomial Root Finding for Graphics". It can be used to find real roots of polynomials of degree 10 and higher.
+Nomial is a TypeScript implementation of Cem Yuksel's fast, robust, and simple root finding algorithm presented in the paper "High-Performance Polynomial Root Finding for Graphics". It can be used to find real roots of polynomials of degree 10 and higher.
 
 ### Usage
 
