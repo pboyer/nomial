@@ -16,9 +16,9 @@ export declare class Polynomial {
  * High-Performance Polynomial Root Finding for Graphics (Yuksel 2022)
  *
  * @param f polynomial to find the roots of
- * @param startInterval beginning of interval to search
- * @param endInterval end of interval to search
- * @param epsilon tolerance for root finding
+ * @param startInterval beginning of interval to search (defaults to -1000)
+ * @param endInterval end of interval to search (defaults to 1000)
+ * @param epsilon tolerance for root finding (defaults to 1e-6)
  * @returns An array of roots
  */
-export declare function polynomialRoots(f: Polynomial, startInterval: number, endInterval: number, epsilon: number): number[];
+export declare function polynomialRoots(f: Polynomial, startInterval?: number, endInterval?: number, epsilon?: number): number[];

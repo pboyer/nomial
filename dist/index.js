@@ -36,12 +36,12 @@ exports.Polynomial = Polynomial;
  * High-Performance Polynomial Root Finding for Graphics (Yuksel 2022)
  *
  * @param f polynomial to find the roots of
- * @param startInterval beginning of interval to search
- * @param endInterval end of interval to search
- * @param epsilon tolerance for root finding
+ * @param startInterval beginning of interval to search (defaults to -1000)
+ * @param endInterval end of interval to search (defaults to 1000)
+ * @param epsilon tolerance for root finding (defaults to 1e-6)
  * @returns An array of roots
  */
-function polynomialRoots(f, startInterval, endInterval, epsilon) {
+function polynomialRoots(f, startInterval = -1000, endInterval = 1000, epsilon = 1e-6) {
     if (f.degree === 2) {
         return findQuadraticRoots(f, startInterval, endInterval);
     }
