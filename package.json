@@ -11,7 +11,9 @@
   },
   "scripts": {
     "test": "ts-node test/index.ts",
-    "build": "tsc"
+    "build": "tsc",
+    "publish": "tsc && yarn publish",
+    "benchmark": "ts-node benchmark/index.ts"
   },
   "keywords": [
     "polynomial",

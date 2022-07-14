@@ -1,4 +1,4 @@
-import { Polynomial, polynomialRoots } from "../dist";
+import findRoots, { evaluate } from "../dist";
 import { strict as assert } from "assert";
 
 const cases = [
@@ -26,13 +26,12 @@ const cases = [
 ];
 
 for (const c of cases) {
-    const f = new Polynomial(c.coefficients);
-    const roots = polynomialRoots(f, c.startInterval, c.endInterval, c.epsilon);
+    const roots = findRoots(c.coefficients, c.startInterval, c.endInterval, c.epsilon);
 
     assert.equal(roots.length, c.expectedCount);
 
     for (const root of roots) {
         assert.ok(c.startInterval <= root && root <= c.endInterval);
-        assert.ok(Math.abs(f.evaluate(root)) < c.epsilon);
+        assert.ok(Math.abs(evaluate(c.coefficients, root)) < c.epsilon);
     }
 }

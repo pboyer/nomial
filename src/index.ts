@@ -1,57 +1,21 @@
 /**
- * Class representing a polynomial.
- */
-export class Polynomial {
-    readonly degree: number;
-
-    /**
-     * @param coefficients coefficients in order of increasing power eg 1 + 2x + 3x^2 - 12x^3 => [1, 2, 3, -12]
-     */
-    constructor(readonly coefficients: readonly number[]) {
-        this.degree = coefficients.length - 1;
-    }
-
-    evaluate(x: number): number {
-        let result = 0;
-        for (let i = 0, l = this.coefficients.length; i < l; i++) {
-            result += this.coefficients[i] * Math.pow(x, i);
-        }
-        return result;
-    }
-
-    derivative(): Polynomial {
-        if (this.degree === 0) {
-            throw new Error("Cannot take derivative of constant polynomial");
-        }
-
-        const coefficients = [];
-
-        for (let i = 1; i < this.coefficients.length; i++) {
-            coefficients.push(this.coefficients[i] * i);
-        }
-
-        return new Polynomial(coefficients);
-    }
-}
-
-/**
  * Find the roots of polynomial using the method described in 
  * High-Performance Polynomial Root Finding for Graphics (Yuksel 2022)
  * 
- * @param f polynomial to find the roots of
+ * @param coeffs coeffs of the polynomial
  * @param startInterval beginning of interval to search (defaults to -1000)
  * @param endInterval end of interval to search (defaults to 1000)
  * @param epsilon tolerance for root finding (defaults to 1e-6)
  * @returns An array of roots
  */
-export function polynomialRoots(f: Polynomial, startInterval: number = -1000, endInterval: number = 1000, epsilon: number = 1e-6): number[] {
-    if (f.degree === 2) {
-        return findQuadraticRoots(f, startInterval, endInterval);
+export default function polynomialRoots(coeffs: number[], startInterval: number = -1000, endInterval: number = 1000, epsilon: number = 1e-6): number[] {
+    if (degree(coeffs) === 2) {
+        return findQuadraticRoots(coeffs, startInterval, endInterval);
     }
 
-    const derivative = f.derivative();
+    const derivCoeffs = derivative(coeffs);
 
-    const rootsOfDerivative = polynomialRoots(derivative, startInterval, endInterval, epsilon);
+    const rootsOfDerivative = polynomialRoots(derivCoeffs, startInterval, endInterval, epsilon);
     rootsOfDerivative.push(endInterval);
 
     let a = startInterval;
@@ -60,8 +24,8 @@ export function polynomialRoots(f: Polynomial, startInterval: number = -1000, en
 
     for (let i = 0; i < rootsOfDerivative.length; i++) {
         let b = rootsOfDerivative[i];
-        if (Math.sign(f.evaluate(a)) !== Math.sign(f.evaluate(b))) {
-            roots.push(findRoot(f, derivative, a, b, epsilon));
+        if (Math.sign(evaluate(coeffs, a)) !== Math.sign(evaluate(coeffs, b))) {
+            roots.push(findRoot(coeffs, derivCoeffs, a, b, epsilon));
         }
         a = b;
     }
@@ -69,10 +33,36 @@ export function polynomialRoots(f: Polynomial, startInterval: number = -1000, en
     return roots;
 }
 
-function findQuadraticRoots(f: Polynomial, startInterval: number, endInterval: number) {
-    const c = f.coefficients[0];
-    const b = f.coefficients[1];
-    const a = f.coefficients[2];
+export function evaluate(coeffs: number[], x: number) {
+    let result = 0;
+    for (let i = 0, l = coeffs.length; i < l; i++) {
+        result += coeffs[i] * Math.pow(x, i);
+    }
+    return result;
+}
+
+function degree(coeffs: number[]): number {
+    return coeffs.length - 1;
+}
+
+export function derivative(coeffs: number[]): number[] {
+    if (degree(coeffs) === 0) {
+        throw new Error("Cannot take derivative of constant polynomial");
+    }
+
+    const outcoeffs = [];
+
+    for (let i = 1; i < coeffs.length; i++) {
+        outcoeffs.push(coeffs[i] * i);
+    }
+
+    return outcoeffs;
+}
+
+function findQuadraticRoots(coeffs: number[], startInterval: number, endInterval: number) {
+    const c = coeffs[0];
+    const b = coeffs[1];
+    const a = coeffs[2];
     const delta = b * b - 4 * a * c;
 
     if (delta >= 0) {
@@ -104,17 +94,17 @@ function multSign(v: number, sign: number) {
 }
 
 // Following http://www.cemyuksel.com/research/polynomials/polynomial_roots_hpg2022_supplemental.pdf
-function findRoot(f: Polynomial, deriv: Polynomial, x1: number, x2: number, epsilon: number): number {
+function findRoot(coeffs: number[], derivCoeffs: number[], x1: number, x2: number, epsilon: number): number {
     let xr = (x1 + x2) / 2;
 
     if (Math.abs(x2 - x1) <= 2 * epsilon) {
         return xr;
     }
 
-    if (f.degree === 3) {
+    if (degree(coeffs) === 3) {
         let xn = -0;
         for (let i = 0; i < 10; i++) {
-            xn = xr - f.evaluate(xr) / deriv.evaluate(xr);
+            xn = xr - evaluate(coeffs, xr) / evaluate(derivCoeffs, xr);
             xn = Math.max(x1, Math.min(x2, xn));
 
             if (Math.abs(xr - xn) <= epsilon) {
@@ -129,9 +119,9 @@ function findRoot(f: Polynomial, deriv: Polynomial, x1: number, x2: number, epsi
         }
     }
 
-    const y1 = f.evaluate(x1);
+    const y1 = evaluate(coeffs, x1);
 
-    let yr = f.evaluate(xr);
+    let yr = evaluate(coeffs, xr);
 
     while (true) {
         if (Math.sign(yr) === Math.sign(y1)) {
@@ -140,12 +130,12 @@ function findRoot(f: Polynomial, deriv: Polynomial, x1: number, x2: number, epsi
             x2 = xr;
         }
 
-        let xn = xr - yr / deriv.evaluate(xr);
+        let xn = xr - yr / evaluate(derivCoeffs, xr);
 
         if (x1 < xn && xn < x2) {
             if (Math.abs(xr - xn) > epsilon) {
                 xr = xn;
-                yr = f.evaluate(xr);
+                yr = evaluate(coeffs, xr);
             } else {
                 if (Math.sign(yr) === Math.sign(y1)) {
                     xr = xn + epsilon;
@@ -153,7 +143,7 @@ function findRoot(f: Polynomial, deriv: Polynomial, x1: number, x2: number, epsi
                     xr = xn - epsilon;
                 }
 
-                const y = f.evaluate(xr);
+                const y = evaluate(coeffs, xr);
                 if (Math.sign(y) !== Math.sign(yr)) {
                     return xn;
                 } else {
@@ -165,10 +155,8 @@ function findRoot(f: Polynomial, deriv: Polynomial, x1: number, x2: number, epsi
             if (xr === x1 || xr === x2 || x2 - x1 <= 2 * epsilon) {
                 return xr;
             } else {
-                yr = f.evaluate(xr);
+                yr = evaluate(coeffs, xr);
             }
         }
     }
 }
-
-
