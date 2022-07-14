@@ -2,7 +2,7 @@
  * Find the roots of polynomial using the method described in
  * High-Performance Polynomial Root Finding for Graphics (Yuksel 2022)
  *
- * @param coeffs coeffs of the polynomial
+ * @param coeffs coefficients of the polynomial
  * @param startInterval beginning of interval to search (defaults to -1000)
  * @param endInterval end of interval to search (defaults to 1000)
  * @param epsilon tolerance for root finding (defaults to 1e-6)
