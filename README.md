@@ -2,6 +2,15 @@
 
 Nomial is a TypeScript implementation of Cem Yuksel's extremely fast, robust, and simple root finding algorithm presented in the paper "High-Performance Polynomial Root Finding for Graphics" (2022). It can be used to find real roots of polynomials of degree 10 and higher. It has no dependencies.
 
+## Installation
+
+> npm install nomial
+
+or using yarn
+
+> yarn add nomial
+
+
 ## Usage
 
 ### Importing
@@ -34,13 +43,6 @@ const epsilon = 1e-6;
 const roots = polynomialRoots(f, startSearchInterval, endSearchInterval, epsilon);
 ```
 
-## Installation
-
-> npm install nomial
-
-or using yarn
-
-> yarn add nomial
 
 ## Paper
 
