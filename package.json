@@ -1,6 +1,6 @@
 {
   "name": "nomial",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "A TypeScript implementation of High-Performance Polynomial Root Finding for Graphics (Yuksel 2022)",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -12,6 +12,7 @@
   "scripts": {
     "test": "ts-node test/index.ts",
     "build": "tsc",
+    "publish": "yarn build",
     "benchmark": "ts-node benchmark/index.ts"
   },
   "keywords": [
