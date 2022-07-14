@@ -34,7 +34,7 @@ const epsilon = 1e-6;
 const roots = polynomialRoots(f, startSearchInterval, endSearchInterval, epsilon);
 ```
 
-### Installing
+## Installation
 
 > npm install nomial
 
@@ -42,6 +42,6 @@ or using yarn
 
 > yarn add nomial
 
-### Paper
+## Paper
 
 Cem Yuksel. 2022. High-Performance Polynomial Root Finding for Graphics. Proc. ACM Comput. Graph. Interact. Tech. 5, 3, Article 7 (July 2022), 15 pages.
