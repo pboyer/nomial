@@ -5,7 +5,7 @@ Rootfinder is a TypeScript implementation of Cem Yuksel's fast, robust, and simp
 ### Usage
 
 ```typescript
-const f = new Polynomial([-7412, -1505, -20, -10, 1]);
+const f = new Polynomial([-7412, -1505, -20, -10, 0, 1]);
 
 const startSearchInterval = -100;
 const endSearchInterval = 100;
