@@ -1,6 +1,6 @@
 {
   "name": "nomial",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "A TypeScript implementation of High-Performance Polynomial Root Finding for Graphics (Yuksel 2022)",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -26,7 +26,7 @@
   ],
   "author": "Peter Boyer",
   "license": "MIT",
-  "dependencies": {
+  "devDependencies": {
     "@types/node": "^18.0.4",
     "typescript": "^4.7.4"
   }
