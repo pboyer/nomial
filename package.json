@@ -13,10 +13,10 @@
     "url": "git://github.com/pboyer/nomial.git"
   },
   "scripts": {
-    "test": "ts-node test/index.ts",
+    "test": "ts-node --project tsconfig.test.json test/index.ts",
     "build": "tsc --emitDeclarationOnly && rollup -c && cp dist/nomial.js examples/nomial.js",
     "publish": "yarn build",
-    "benchmark": "ts-node benchmark/index.ts"
+    "benchmark": "ts-node --project tsconfig.test.json benchmark/index.ts"
   },
   "keywords": [
     "polynomial",
