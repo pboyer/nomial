@@ -10,17 +10,16 @@ or using yarn
 
 > yarn add nomial
 
-
 ## Usage
 
 ### Importing
 
 ```typescript
 // as a ES module
-import findRoots from 'nomial';
+import { Polynomial, polynomialRoots } from 'nomial';
 
 // as a CommonJS module
-const findRoots = require('nomial');
+const { Polynomial, polynomialRoots } = require('nomial');
 ```
 
 ### Calling
@@ -28,9 +27,10 @@ const findRoots = require('nomial');
 The API is a single function that returns the roots given the polynomial coefficients.
 
 ```typescript
-// The coefficients are stored in order of exponent power so this polynomial corresponds to
-// -7412 - 1505x - 20x^2 - 10x^3 + x^5
-const roots = findRoots([-7412, -1505, -20, -10, 0, 1]);
+// The coefficients are stored in order of increasing exponent so this polynomial corresponds to
+// -7412 - 1505x - 20x^2 - 10x^3 + 2x^4 + x^5
+const f = new Polynomial([-7412, -1505, -20, -10, 2, 1]);
+const roots = polynomialRoots(f);
 ```
 
 There are optional arguments to specify the start and end of the search interval and epsilon used to terminate root finding.
@@ -40,9 +40,8 @@ const startSearchInterval = -100;
 const endSearchInterval = 100;
 const epsilon = 1e-6;
 
-const roots = findRoots(coefficients, startSearchInterval, endSearchInterval, epsilon);
+const roots = polynomialRoots(f, startSearchInterval, endSearchInterval, epsilon);
 ```
-
 
 ## Paper
 

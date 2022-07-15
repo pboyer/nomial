@@ -1,14 +1,14 @@
-import findRoots from "../dist";
+import { Polynomial, polynomialRoots } from "../src";
 
 const cases = [
     {
-        coefficients: [-7412, -1505, -20, -10, 0, 1],
+        polynomial: new Polynomial([-7412, -1505, -20, -10, 0, 1]),
     },
     {
-        coefficients: [-7412, -1505, -20, -10, 12, 1],
+        polynomial: new Polynomial([-7412, -1505, -20, -10, 12]),
     },
     {
-        coefficients: [-7412, -1505, -20, -10, 12],
+        polynomial: new Polynomial([-7412, -1505, -20, -10]),
     }
 ];
 
@@ -18,7 +18,7 @@ const count = 100000;
 
 for (let i = 0; i < count; i++) {
     for (const c of cases) {
-        const roots = findRoots(c.coefficients);
+        const roots = polynomialRoots(c.polynomial);
     }
 }
 
