@@ -24,8 +24,6 @@ const { Polynomial, polynomialRoots } = require('nomial');
 
 ### Calling
 
-The API is a single function that returns the roots given the polynomial coefficients.
-
 ```typescript
 // The coefficients are stored in order of increasing exponent so this polynomial corresponds to
 // -7412 - 1505x - 20x^2 - 10x^3 + 2x^4 + x^5
