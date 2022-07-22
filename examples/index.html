@@ -16,6 +16,7 @@
         }
 
         #overlay {
+            font-size: 16px;
             position: absolute;
             top: 0;
             right: 0;
@@ -24,9 +25,11 @@
             padding: 16px;
             font-family: monospace;
             font-weight: bold;
+            text-align: right;
         }
 
         #explainer {
+            font-size: 16px;
             position: absolute;
             bottom: 0;
             left: 0;
@@ -43,10 +46,15 @@
     <canvas id="canvas"></canvas>
     <div id="overlay"><a href="https://github.com/pboyer/nomial">Nomial source code ↗</a></div>
     <div id="explainer">
-        Nomial is a TypeScript implementation of <b>High-Performance Polynomial Root Finding for Graphics (Yuksel
-            2022)</b>. A common application for root finding in graphics and CAD is intersections. This example
-        shows how Nomial can be used to find the intersection of 100 cubic (degree 3) bezier curves. Each pairwise
-        intersection requires finding the root of one degree 9 and two degree 3 polynomials.
+        <p>
+            Nomial is a TypeScript implementation of <a
+                href="http://www.cemyuksel.com/research/polynomials/">High-Performance
+                Polynomial Root Finding for Graphics (Yuksel
+                2022)</a>.
+        </p>
+        <p>This example shows how Nomial can be used to find the intersection of 100 cubic (degree 3) bezier curves.
+            Intersecting each pair of beziers requires finding the roots of one degree 9 and two degree 3 polynomials.
+        </p>
     </div>
 </body>
 <script>
