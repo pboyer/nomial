@@ -14,11 +14,23 @@
             height: 100%;
             width: 100%;
         }
+
+        #overlay {
+            position: absolute;
+            top: 0;
+            right: 0;
+            background: white;
+            color: black;
+            padding: 16px;
+            font-family: monospace;
+            font-weight: bold;
+        }
     </style>
 </head>
 
 <body>
     <canvas id="canvas"></canvas>
+    <div id="overlay"><a href="https://github.com/pboyer/nomial">Nomial source code ↗</a></div>
 </body>
 <script>
     const { Polynomial, polynomialRoots } = nomial;
