@@ -29,7 +29,8 @@ const { Polynomial, polynomialRoots } = require('nomial');
 ### Calling
 
 ```typescript
-// The coefficients are stored in order of increasing exponent so this polynomial corresponds to
+// The coefficients are stored in order of increasing exponent.
+// This is the polynomial used in this example:
 // -7412 - 1505x - 20x^2 - 10x^3 + 2x^4 + x^5
 const f = new Polynomial([-7412, -1505, -20, -10, 2, 1]);
 const roots = polynomialRoots(f);
