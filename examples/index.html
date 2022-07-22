@@ -377,12 +377,12 @@
         for (const pt of pts) {
             ctx.fillStyle = "white";
             ctx.beginPath();
-            ctx.arc(pt.x, pt.y, 3 * ptradius, 0, 2 * Math.PI);
+            ctx.arc(pt.x, pt.y, 2.5 * ptradius, 0, 2 * Math.PI);
             ctx.fill();
 
             ctx.fillStyle = "black";
             ctx.beginPath();
-            ctx.arc(pt.x, pt.y, 2 * ptradius, 0, 2 * Math.PI);
+            ctx.arc(pt.x, pt.y, 1.5 * ptradius, 0, 2 * Math.PI);
             ctx.fill();
         }
     }

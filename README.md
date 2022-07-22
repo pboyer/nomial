@@ -41,6 +41,13 @@ const epsilon = 1e-6;
 const roots = polynomialRoots(f, startSearchInterval, endSearchInterval, epsilon);
 ```
 
-## Paper
+## Resources
+
+This is a great video intro: https://youtu.be/CoGo_3C7xR0?t=7092
 
 Cem Yuksel. 2022. High-Performance Polynomial Root Finding for Graphics. Proc. ACM Comput. Graph. Interact. Tech. 5, 3, Article 7 (July 2022), 15 pages.
+
+## Changelog
+
+- 1.0.11 - Add cubic deflation. Don't use Math.pow in Polynomial.evaluate. 16x faster!
+- 1.0.10 - First public release 

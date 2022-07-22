@@ -12,9 +12,11 @@ export class Polynomial {
     }
 
     evaluate(x: number): number {
+        let xx = 1;
         let result = 0;
         for (let i = 0, l = this.coefficients.length; i < l; i++) {
-            result += this.coefficients[i] * Math.pow(x, i);
+            result += this.coefficients[i] * xx;
+            xx *= x;
         }
         return result;
     }
@@ -51,18 +53,39 @@ export function polynomialRoots(f: Polynomial, startInterval: number = -1000, en
     rootsOfDerivative.push(endInterval);
 
     let a = startInterval;
+    let fa = f.evaluate(startInterval);
 
     const roots: number[] = [];
 
     for (let i = 0; i < rootsOfDerivative.length; i++) {
-        let b = rootsOfDerivative[i];
-        if (Math.sign(f.evaluate(a)) !== Math.sign(f.evaluate(b))) {
-            roots.push(findRoot(f, derivative, a, b, epsilon));
+        const b = rootsOfDerivative[i];
+        const fb = f.evaluate(b);
+
+        if (Math.sign(fa) !== Math.sign(fb)) {
+            const r = findRoot(f, derivative, a, b, fa, epsilon);
+            if (f.degree === 3) {
+                const deflated = deflate(f, r);
+                return [r, ...findQuadraticRoots(deflated, startInterval, endInterval)];
+            }
+
+            roots.push(r);
         }
+
         a = b;
+        fa = fb;
     }
 
     return roots;
+}
+
+function deflate(f: Polynomial, xr: number) {
+    const c = f.coefficients[1];
+    const b = f.coefficients[2];
+    const a = f.coefficients[3];
+    const ap = a;
+    const bp = b + ap * xr;
+    const cp = c + bp * xr;
+    return new Polynomial([cp, bp, ap]);
 }
 
 function findQuadraticRoots(f: Polynomial, startInterval: number, endInterval: number) {
@@ -100,7 +123,7 @@ function multSign(v: number, sign: number) {
 }
 
 // Following http://www.cemyuksel.com/research/polynomials/polynomial_roots_hpg2022_supplemental.pdf
-function findRoot(f: Polynomial, deriv: Polynomial, x1: number, x2: number, epsilon: number): number {
+function findRoot(f: Polynomial, deriv: Polynomial, x1: number, x2: number, fx1: number, epsilon: number): number {
     let xr = (x1 + x2) / 2;
 
     if (Math.abs(x2 - x1) <= 2 * epsilon) {
@@ -125,7 +148,7 @@ function findRoot(f: Polynomial, deriv: Polynomial, x1: number, x2: number, epsi
         }
     }
 
-    const y1 = f.evaluate(x1);
+    const y1 = fx1;
 
     let yr = f.evaluate(xr);
 
