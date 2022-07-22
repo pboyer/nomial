@@ -1,6 +1,10 @@
 ## Nomial
 
-Nomial is a TypeScript implementation of Cem Yuksel's extremely fast, robust, and simple root finding algorithm presented in the paper "High-Performance Polynomial Root Finding for Graphics" (2022). It can be used to find real roots of polynomials of degree 10 and higher.  This package has no dependencies and is `1.5kb` minified and `787B` minified & gzipped.
+Nomial is a TypeScript implementation of Cem Yuksel's extremely fast, robust, and simple root finding algorithm presented in the paper "High-Performance Polynomial Root Finding for Graphics" (2022).
+
+- Find real roots of polynomials of degree 10 and higher.
+- No dependencies.
+- 1.8 kilobyes minified, 844 bytes minified & gzipped.
 
 ## Installation
 
